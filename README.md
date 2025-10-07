@@ -59,5 +59,5 @@ Advanced media player with:
 
 
 
-## 📂 Project Structure
+
 
