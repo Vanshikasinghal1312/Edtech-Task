@@ -44,7 +44,7 @@ Advanced media player with:
 
 ---
 
-## 📦 Installation
+## 📦 Installation Steps:
 
 1. Install dependencies:
    npm install
