@@ -47,12 +47,13 @@ Advanced media player with:
 ## 📦 Installation
 
 1. Install dependencies:
-   ```bash
    npm install
-2. Install required packages:
+   
+3. Install required packages:
    npx expo install react-native-webview expo-notifications expo-av expo-screen-orientation @react-navigation/native @react-navigation/native-stack @react-native-community/slider react-native-size-matters @expo/vector-icons
 
-3. npx expo start
+4. Start the app:
+   npx expo start
 
 
 
