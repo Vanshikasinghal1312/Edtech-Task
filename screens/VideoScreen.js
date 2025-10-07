@@ -1,3 +1,26 @@
+// import React from "react";
+// import { StyleSheet, View } from "react-native";
+// import { Video } from "expo-av";
+
+// export default function VideoScreen() {
+//   return (
+//     <View style={styles.container}>
+//       <Video
+//         source={{
+//           uri: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", // HLS test URL
+//         }}
+//         useNativeControls
+//         resizeMode="contain"
+//         style={styles.video}
+//       />
+//     </View>
+//   );
+// }
+// const styles = StyleSheet.create({
+//   container: { flex: 1, backgroundColor: "black", justifyContent: "center" },
+//   video: { width: "100%", height: 300 },
+// });
+
 import React, { useRef, useState, useEffect } from "react";
 import {
   View,
@@ -317,166 +340,3 @@ const styles = StyleSheet.create({
 
 
 
-
-// import React, { useRef, useState, useEffect } from "react";
-// import {
-//   View,
-//   StyleSheet,
-//   TouchableOpacity,
-//   Text,
-//   TouchableWithoutFeedback,
-//   Animated,
-// } from "react-native";
-// import { Video } from "expo-av";
-// import Slider from "@react-native-community/slider";
-// import { Ionicons } from "@expo/vector-icons";
-
-// export default function VideoScreen() {
-//   const videoRef = useRef(null);
-//   const [isPlaying, setIsPlaying] = useState(false);
-//   const [isMuted, setIsMuted] = useState(false);
-//   const [position, setPosition] = useState(0);
-//   const [duration, setDuration] = useState(0);
-//   const [showControls, setShowControls] = useState(true);
-
-//   const hlsUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
-
-//   // Auto-hide timer
-//   useEffect(() => {
-//     if (showControls) {
-//       const timer = setTimeout(() => setShowControls(false), 5000);
-//       return () => clearTimeout(timer);
-//     }
-//   }, [showControls, position]);
-
-//   const onPlaybackStatusUpdate = (status) => {
-//     if (status.isLoaded) {
-//       setPosition(status.positionMillis);
-//       setDuration(status.durationMillis);
-//       setIsPlaying(status.isPlaying);
-//     }
-//   };
-
-//   const togglePlayPause = async () => {
-//     if (!videoRef.current) return;
-//     if (isPlaying) {
-//       await videoRef.current.pauseAsync();
-//     } else {
-//       await videoRef.current.playAsync();
-//     }
-//   };
-
-//   const skipForward = async () => {
-//     if (!videoRef.current) return;
-//     await videoRef.current.setPositionAsync(Math.min(position + 10000, duration));
-//   };
-
-//   const skipBackward = async () => {
-//     if (!videoRef.current) return;
-//     await videoRef.current.setPositionAsync(Math.max(position - 10000, 0));
-//   };
-
-//   const toggleMute = async () => {
-//     if (!videoRef.current) return;
-//     await videoRef.current.setIsMutedAsync(!isMuted);
-//     setIsMuted(!isMuted);
-//   };
-
-//   const presentFullScreen = async () => {
-//     if (!videoRef.current) return;
-//     videoRef.current.presentFullscreenPlayer();
-//   };
-
-//   const formatTime = (millis) => {
-//     const totalSeconds = Math.floor(millis / 1000);
-//     const minutes = Math.floor(totalSeconds / 60);
-//     const seconds = totalSeconds % 60;
-//     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-//   };
-
-//   const toggleControls = () => {
-//     setShowControls(!showControls);
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <TouchableWithoutFeedback onPress={toggleControls}>
-//         <Video
-//           ref={videoRef}
-//           source={{ uri: hlsUrl }}
-//           style={styles.video}
-//           resizeMode="contain"
-//           isMuted={isMuted}
-//           shouldPlay={false}
-//           onPlaybackStatusUpdate={onPlaybackStatusUpdate}
-//         />
-//       </TouchableWithoutFeedback>
-
-//       {showControls && (
-//         <>
-//           {/* Slider */}
-//           <View style={styles.sliderContainer}>
-//             <Text style={styles.timeText}>{formatTime(position)}</Text>
-//             <Slider
-//               style={styles.slider}
-//               minimumValue={0}
-//               maximumValue={duration}
-//               value={position}
-//               minimumTrackTintColor="#1EB1FC"
-//               maximumTrackTintColor="#ccc"
-//               thumbTintColor="#1EB1FC"
-//               onSlidingComplete={async (val) => {
-//                 if (videoRef.current) await videoRef.current.setPositionAsync(val);
-//               }}
-//             />
-//             <Text style={styles.timeText}>{formatTime(duration)}</Text>
-//           </View>
-
-//           {/* Controls */}
-//           <View style={styles.controls}>
-//             <TouchableOpacity onPress={skipBackward}>
-//               <Ionicons name="play-back" size={36} color="#fff" />
-//             </TouchableOpacity>
-//             <TouchableOpacity onPress={togglePlayPause}>
-//               <Ionicons
-//                 name={isPlaying ? "pause-circle" : "play-circle"}
-//                 size={48}
-//                 color="#1EB1FC"
-//               />
-//             </TouchableOpacity>
-//             <TouchableOpacity onPress={skipForward}>
-//               <Ionicons name="play-forward" size={36} color="#fff" />
-//             </TouchableOpacity>
-//             <TouchableOpacity onPress={toggleMute}>
-//               <Ionicons name={isMuted ? "volume-mute" : "volume-high"} size={36} color="#fff" />
-//             </TouchableOpacity>
-//             <TouchableOpacity onPress={presentFullScreen}>
-//               <Ionicons name="expand" size={36} color="#fff" />
-//             </TouchableOpacity>
-//           </View>
-//         </>
-//       )}
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: { flex: 1, backgroundColor: "#000", justifyContent: "center" },
-//   video: { width: "100%", height: 250, backgroundColor: "#000" },
-//   controls: {
-//     flexDirection: "row",
-//     justifyContent: "space-around",
-//     alignItems: "center",
-//     paddingVertical: 10,
-//     backgroundColor: "rgba(0,0,0,0.6)",
-//   },
-//   sliderContainer: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     paddingHorizontal: 12,
-//     marginTop: 10,
-//     backgroundColor: "rgba(0,0,0,0.6)",
-//   },
-//   slider: { flex: 1, marginHorizontal: 10 },
-//   timeText: { color: "#fff", width: 50, textAlign: "center" },
-// });
