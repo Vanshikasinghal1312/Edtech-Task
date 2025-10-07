@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavigationContainer, createNavigationContainerRef } from "@react-navigation/native";
+import {createNavigationContainerRef } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Notifications from "expo-notifications";
 
@@ -41,7 +41,9 @@ export default function App() {
         <Stack.Screen
           name="WebView"
           component={WebViewScreen}
-          options={{ title: "WebView + Notifications" }}
+          options={{ title: "WebView + Notifications" , }}
+          
+          
         />
         <Stack.Screen
           name="Video"

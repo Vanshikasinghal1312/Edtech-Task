@@ -16,10 +16,16 @@
 //     </View>
 //   );
 // }
+
 // const styles = StyleSheet.create({
 //   container: { flex: 1, backgroundColor: "black", justifyContent: "center" },
 //   video: { width: "100%", height: 300 },
 // });
+
+
+
+
+
 
 import React, { useRef, useState, useEffect } from "react";
 import {
@@ -37,8 +43,18 @@ import { Video } from "expo-av";
 import Slider from "@react-native-community/slider";
 import { Ionicons } from "@expo/vector-icons";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { ScaledSheet, moderateScale } from "react-native-size-matters";
+import { useNavigation } from "@react-navigation/native";
 
 export default function VideoScreen() {
+   const navigation = useNavigation();
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: !isFullScreen,   // ✅ hide header in fullscreen
+    });
+  }, [isFullScreen]);
   const videoRef = useRef(null);
   const { width, height } = useWindowDimensions();
 
@@ -47,7 +63,7 @@ export default function VideoScreen() {
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
   const [showControls, setShowControls] = useState(true);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
   const controlOpacity = useRef(new Animated.Value(1)).current;
   const skipAnimForward = useRef(new Animated.Value(0)).current;
@@ -219,13 +235,6 @@ export default function VideoScreen() {
         </View>
       </View>
 
-      {/* Overlay Play Button */}
-      {!isPlaying && (
-        <Animated.View style={[styles.overlayPlayButton, { opacity: overlayOpacity }]}>
-          <Ionicons name="play-circle" size={100} color="rgba(30,177,252,0.8)" />
-        </Animated.View>
-      )}
-
       {/* Skip Animations */}
       {skipForwardVisible && (
         <Animated.View style={[styles.skipTextContainer, { right: 50, transform: [{ translateY: skipAnimForward }] }]}>
@@ -296,26 +305,26 @@ const styles = StyleSheet.create({
   sliderContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 12,
+    paddingHorizontal: moderateScale(17),
     backgroundColor: "rgba(0,0,0,0.5)",
   },
-  slider: { flex: 1, marginHorizontal: 10 },
+  slider: { flex: 1, marginHorizontal: moderateScale(9) },
   timeText: { color: "#fff", width: 50, textAlign: "center" },
   controls: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingVertical: 10,
+    paddingVertical: moderateScale(45),
     backgroundColor: "rgba(0,0,0,0.6)",
   },
-  iconButton: { paddingHorizontal: 5 },
-  playButton: { marginHorizontal: 10 },
+  iconButton: { paddingHorizontal: moderateScale(9) },
+  playButton: { marginHorizontal:  moderateScale(9) },
   skipTextContainer: {
     position: "absolute",
     top: "40%",
     backgroundColor: "rgba(0,0,0,0.5)",
-    padding: 8,
-    borderRadius: 8,
+    padding:  moderateScale(19),
+    borderRadius: moderateScale(7),
   },
   skipText: { color: "#fff", fontSize: 28, fontWeight: "bold" },
   overlayPlayButton: {
@@ -324,6 +333,7 @@ const styles = StyleSheet.create({
     top: "40%",
   },
 });
+
 
 
 
