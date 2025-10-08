@@ -2,13 +2,10 @@ import React, { useEffect } from "react";
 import {createNavigationContainerRef } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Notifications from "expo-notifications";
-
 import WebViewScreen from "../../screens/WebViewScreen";
 import VideoScreen from "../../screens/VideoScreen";
 
-// Navigation ref so we can navigate outside components
 export const navigationRef = createNavigationContainerRef();
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -23,7 +20,6 @@ export default function App() {
       }),
     });
 
-    // Handle notification tap → navigate if data.screen exists
     const subscription = Notifications.addNotificationResponseReceivedListener(
       (response) => {
         const screen = response.notification.request.content.data?.screen;
@@ -32,24 +28,13 @@ export default function App() {
         }
       }
     );
-
     return () => subscription.remove();
   }, []);
 
   return (
       <Stack.Navigator initialRouteName="WebView">
-        <Stack.Screen
-          name="WebView"
-          component={WebViewScreen}
-          options={{ title: "WebView + Notifications" , }}
-          
-          
-        />
-        <Stack.Screen
-          name="Video"
-          component={VideoScreen}
-          options={{ title: "Video Player" }}
-        />
+        <Stack.Screen name="WebView" component={WebViewScreen} options={{ title: "WebView + Notifications"}}/>
+        <Stack.Screen name="Video" component={VideoScreen} options={{ title: "Video Player" }}/>
       </Stack.Navigator>
   );
 }
