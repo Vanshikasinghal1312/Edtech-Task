@@ -20,11 +20,15 @@ Advanced media player with:
 - Double-tap gestures for skipping.  
 - Fullscreen toggle with orientation lock.  
 - Auto-hide controls for immersive experience.  
-- Slider with real-time playback updates.  
-
+- Slider with real-time playback updates.
+- Next/Previous video switching between multiple streams.
+- Loader visible only while buffering.
+  
+  
 ### 🔹 Navigation & Notifications (index.tsx)
-- Stack navigation with **React Navigation**.  
-- Notification handler with **Expo Notifications** → tap notification to navigate to screen.  
+- Built with React Navigation (@react-navigation/native + Stack).
+- Integrated Expo Notifications:
+  Local notifications triggered from WebView Screen.
 
 ---
 
@@ -33,7 +37,8 @@ Advanced media player with:
 1. App opens on **WebView Screen** showing React Native docs.  
 2. Tap **Show Notification** → a local notification is scheduled after 2–5s.  
 3. Tap the notification → navigates automatically to **Video Player Screen**.  
-4. On Video Player Screen → control playback, skip, use gestures, or go fullscreen.  
+4. On Video Player Screen → control playback, skip, use gestures, or go fullscreen.
+    
 
 ---
 /screens
