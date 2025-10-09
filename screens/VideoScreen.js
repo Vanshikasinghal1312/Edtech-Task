@@ -33,8 +33,8 @@ export default function VideoScreen() {
   const videoHeight = isFullScreen ? height : width * 0.56;
   const lastTap = useRef(0);
   const dynamicControls = {
-  paddingVertical: isFullScreen ? moderateScale(20) : moderateScale(65),
-  paddingBottom: isFullScreen ? moderateScale(25) : 0,
+  paddingVertical: isFullScreen ? moderateScale(20) : moderateScale(80),
+  paddingBottom: isFullScreen ? moderateScale(30) : 0,
 };
 
   // Hide header in fullscreen
@@ -270,7 +270,8 @@ export default function VideoScreen() {
 
       {/* Controls */}
       <Animated.View
-        style={[styles.controlsContainer, { opacity: controlOpacity }]}
+        style={[styles.controlsContainer, { opacity: controlOpacity,bottom: isFullScreen ? 10 : 70, // normal me 80px upar, fullscreen me 10px niche
+ }]}
       >
         {/* Slider */}
         <View style={styles.sliderContainer}>
@@ -329,12 +330,12 @@ export default function VideoScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#000", justifyContent: "center" },
-  controlsContainer: { position: "absolute", bottom: 0, width: "100%" },
+  controlsContainer: { position: "absolute",  width: "100%" },
   sliderContainer: {flexDirection: "row",alignItems: "center",paddingHorizontal: moderateScale(15),backgroundColor: "rgba(0,0,0,0.5)",},
   slider: { flex: 1, marginHorizontal: moderateScale(5) },
   timeText: { color: "#fff", width: 50, textAlign: "center" },
   controls: {flexDirection: "row",justifyContent: "space-around",alignItems: "center",backgroundColor: "rgba(0,0,0,0.6)"},
-  iconButton: { paddingHorizontal: moderateScale(4) },
+  iconButton: { paddingHorizontal: moderateScale(4),},
   playButton: { marginHorizontal: moderateScale(6) },
   loaderContainer: {position: "absolute",top: 0,left: 0,right: 0,bottom: 0,justifyContent: "center",alignItems: "center",backgroundColor: "rgba(0,0,0,0.25)",zIndex: 2},
 });
